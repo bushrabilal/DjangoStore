@@ -1,0 +1,111 @@
+
+
+Oracle
+MS sql server
+
+website
+
+mysql
+postgree
+slite3
+
+SQL = Structure Query Language
+
+
+CRUD
+C = Create - INSERT
+add new record in a database table
+
+R= Read - SELECT
+fetch data from database table
+
+U = UPDATE - edit
+edit/chane existing data in table
+
+D = Delete - remove
+del existing record from table
+
+go to setting.py
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.oracle',
+        'NAME': 'shoeDB',
+        'USER': 'postgres',
+        'PASSWORD': '12345',
+        'HOST': 'localhost'
+    }
+}
+
+
+next
+
+INSTALLED_APPS = [
+    'shoesApp.apps.ShoesappConfig',
+    applicaion.apps.Applicaion.Config
+
+    pip install Config psycopg2
+    its a package to connect python with postgrees database
+
+    models. shoes
+    it convert into class.models
+
+    class Shoes(models.Model):
+        name = models.CharField(max_length=75)
+        brand = models.CharField(max_length=75)
+        img= models.ImageField(upload_to='pics')
+        price =  models.IntegerField()
+        sale_price = models.IntegerField()
+        sale_active = models.BooleanField(default=False)
+        rating = models.IntegerField()
+
+pip install pillow - if we want to upload something
+
+ae we are running a command
+which takes the model from model file and make table for us and form for in the admin dashboard
+
+python manage.py makemigrations
+shoesApp\migrations\0001_initial.py
+    - Create model Shoes
+we make the table plesse -
+
+
+it migrate the table model
+now next step sql it make a table for us
+python manage.py sqlmigrate application name 0001
+
+now finall  this command
+below
+python manage.py migrate it covnert our dql query - table
+into real - postgrres
+
+we need to create a super user or admin
+for that  we have a command
+python manage.py createsuperuser
+
+
+login
+register model files in to admin.py
+
+from .models import Shoes
+
+admin.site.register(Shoes)
+
+
+shoes - form - add new shoe product
+how to read images from our uploaded folder
+
+
+setting.py -  ye setting pe jake apko likhna hoga
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+
+** for merchant to add products write the line of code below :**
+def index( request ):
+
+    shoes = Shoes.objects.all()
+    return render(request, 'index.html', {'shoes': shoes})
+are you there??
+yes i can hear
+
